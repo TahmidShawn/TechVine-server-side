@@ -27,6 +27,19 @@ const client = new MongoClient(uri, {
 async function run() {
     try {
         // Connect the client to the server	(optional starting in v4.7)
+
+
+        const brandCollection = client.db("brandDB");
+        const brand = brandCollection.collection("brand");
+
+        // get brand data from mongoDB  
+        app.get('/brand', async (req, res) => {
+            const cursor = brand.find();
+            const result = await cursor.toArray()
+            res.send(result)
+        })
+
+
         await client.connect();
         // Send a ping to confirm a successful connection
         await client.db("admin").command({ ping: 1 });
