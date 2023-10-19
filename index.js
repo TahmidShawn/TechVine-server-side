@@ -32,18 +32,70 @@ async function run() {
         const brandCollection = client.db("brandDB");
         const brand = brandCollection.collection("brand");
         const apple = brandCollection.collection("apple");
+        const intel = brandCollection.collection("intel");
+        const nokia = brandCollection.collection("nokia");
+        const samsung = brandCollection.collection("samsung");
+        const sony = brandCollection.collection("sony");
+        const products = brandCollection.collection("products");
 
-        app.get('/apple', async (req, res) => {
-            const cursor = apple.find();
+
+        // created add to cart data for mongoDB 
+        app.post('/products', async (req, res) => {
+            const newProducts = req.body
+            console.log(newProducts);
+            const result = await products.insertOne(newProducts);
+            res.send(result);
+        })
+
+        // get add to cart data from mongoDB  
+        app.get('/products', async (req, res) => {
+            const cursor = products.find();
             const result = await cursor.toArray()
             res.send(result)
         })
+
         // get brand data from mongoDB  
         app.get('/brand', async (req, res) => {
             const cursor = brand.find();
             const result = await cursor.toArray()
             res.send(result)
         })
+
+        // get apple data from mongoDB 
+        app.get('/apple', async (req, res) => {
+            const cursor = apple.find();
+            const result = await cursor.toArray()
+            res.send(result)
+        })
+
+        // get Intel data from mongoDB 
+        app.get('/intel', async (req, res) => {
+            const cursor = intel.find();
+            const result = await cursor.toArray()
+            res.send(result)
+        })
+
+        // get Nokia data from mongoDB 
+        app.get('/nokia', async (req, res) => {
+            const cursor = nokia.find();
+            const result = await cursor.toArray()
+            res.send(result)
+        })
+
+        // get samsung data from mongoDB 
+        app.get('/samsung', async (req, res) => {
+            const cursor = samsung.find();
+            const result = await cursor.toArray()
+            res.send(result)
+        })
+
+        // get sony data from mongoDB 
+        app.get('/sony', async (req, res) => {
+            const cursor = sony.find();
+            const result = await cursor.toArray()
+            res.send(result)
+        })
+
 
 
         await client.connect();
