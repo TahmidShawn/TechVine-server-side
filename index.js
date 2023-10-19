@@ -31,7 +31,13 @@ async function run() {
 
         const brandCollection = client.db("brandDB");
         const brand = brandCollection.collection("brand");
+        const apple = brandCollection.collection("apple");
 
+        app.get('/apple', async (req, res) => {
+            const cursor = apple.find();
+            const result = await cursor.toArray()
+            res.send(result)
+        })
         // get brand data from mongoDB  
         app.get('/brand', async (req, res) => {
             const cursor = brand.find();
